@@ -63,19 +63,19 @@ export default class Game {
 
     //constants
     const start_vel_x = [2,-2, 3, -3]
-    const start_vel_y = [1.5, -1.5, 1, -1, 2, -2]
-    let hitByte = new Audio('../sounds/collision.wav')
-    let hitByte2 = new Audio('../sounds/collision2.wav')
+    const start_vel_y = [1.5, -1.5, 2, -2]
+    let hitByte = new Audio('sounds/collision.wav')
+    let hitByte2 = new Audio('sounds/collision2.wav')
     this.hitArraySounds = [hitByte, hitByte2]
-    this.scoreByte = new Audio('../sounds/score_sound.wav')
+    this.scoreByte = new Audio('sounds/score_sound.wav')
 
 
     //key events
     window.addEventListener('keydown', event => {
-      if (event.keyCode === 38) {
+      if (event.keyCode === 87) {
         //up
         this.players[0].vel.y = -3
-      } else if (event.keyCode === 40) {
+      } else if (event.keyCode === 83) {
         //down
         this.players[0].vel.y = 3
       } else if (event.keyCode === 32 && this.ball.vel.x === 0) {
@@ -107,7 +107,7 @@ export default class Game {
   collide(player, ball) {
     if (player.left() < ball.right() && player.right() > ball.left() &&
     player.top() < ball.bottom() && player.bottom() > ball.top()) {
-      ball.vel.x = -ball.vel.x * 1.06;
+      ball.vel.x = -ball.vel.x * 1.02;
       this.rallyCounter++
       this.hitArraySounds[Math.floor(Math.random()*this.hitArraySounds.length)].play()
     }
@@ -182,20 +182,18 @@ export default class Game {
     if (this.ball.right() < 0 || this.ball.left() > this.canvas.width) {
         ++this.players[this.ball.vel.x < 0 | 0].score;
         this.scoreByte.play()
-        console.log(this.players[0].score);
-        console.log(this.players[1].score);
         this.resetGame();
     }
-    const compSpeed = [1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
+    const compSpeed = [1.3, 1.4, 1.5, 1.55]
     let speed = 1
-    if (this.rallyCounter < 8) {
-      speed = compSpeed[0]
-    } else if (this.rallyCounter < 16) {
-      speed = compSpeed[1]
-    } else if (this.rallyCounter < 24) {
-      speed = compSpeed[2]
-    } else {
+    if (this.players[0].score > 8) {
       speed = compSpeed[3]
+    } else if (this.players[0].score > 6) {
+      speed = compSpeed[2]
+    } else if (this.players[0].score > 4) {
+      speed = compSpeed[1]
+    } else {
+      speed = compSpeed[0]
     }
     if (this.players[1].pos.y < this.ball.pos.y) {
       this.players[1].pos.y+= speed

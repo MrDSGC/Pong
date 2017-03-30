@@ -1,12 +1,74 @@
 body {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
 
-.screen {
-  width:1000px;
+img {
+  width: 821px;
   height: auto;
+}
+
+canvas {
+  position: absolute;
+  top: 182px;
+  right: 89.5px;
+}
+
+div.full-game {
+  width:800px;
+  background-color: black;
+  height: 730px;
+
+  position: absolute;
+  left: 18%;
+}
+div.control-instructions {
+  background: url('images/control_instructions.png')no-repeat;
+  left: -162px;
+  top: 82px;
+  transform: rotate(-5deg);
+}
+
+div.start-instructions {
+  background: url('images/start_instructions.png')no-repeat;
+  left: -180px;
+  top: 368px;
+  transform: rotate(5deg);
+}
+
+div.score-rules {
+  background: url('images/score_rules.png')no-repeat;
+  right: -190px;
+  top: 230px;
+  transform: rotate(7deg);
+}
+
+div.mute-button {
+  background: url('images/muted.svg')no-repeat;
+  position:absolute;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+div.control-instructions, div.start-instructions, div.score-rules {
+  position:absolute;
+  background-size: contain;
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+}
+
+
+html {
+  background: url('images/background_wood.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  z-index: 1000;
 }

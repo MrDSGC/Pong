@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="./stylesheet.css" type="text/css"/>
   </head>
   <body>
-    <canvas id="game" width="600" height="400"/>
-    <script type="text/javascript" src="bundle.js"></script>
-
+    <div class="full-game">
+      <div class="control-instructions"></div>
+      <div class="start-instructions"></div>
+      <div class="score-rules"></div>
+      <div class="mute-button" id="mute-button"></div>
+      <img classname="screen" src="images/pongscreen.png">
+        <canvas classname="game" id="game" width="600" height="400"/>
+        <script type="text/javascript" src="bundle.js"></script>
+      </img>
+    </div>
   </body>
-  <img className="screen" src="images/pongscreen.png"/>
 </html>
