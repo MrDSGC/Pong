@@ -61,8 +61,15 @@ export default class Game {
 
 
     //constants
-    const start_vel_x = [2.2, -2.2, 2.5, -2.5, 3, -3]
-    const start_vel_y = [1, -1, 1.5, -1.5, 2, -2]
+    const start_vel_x = [2.2, -2.2,
+                         2.5, -2.5,
+                         3, -3]
+    const start_vel_y = [ 1, -1,
+                          1.2, -1,2,
+                          1.4, -1.4,
+                          1.6, -1.6,
+                          1.8, -1.8,
+                          2, -2]
     let hitByte = new Audio('sounds/collision.wav')
     let hitByte2 = new Audio('sounds/collision2.wav')
     this.hitArraySounds = [hitByte, hitByte2]
@@ -192,7 +199,8 @@ export default class Game {
 
 
   updateFrame () {
-    const variation = [1.05, 1.07, 1.09, 1.11]
+    const variation = [0.85, 0.88, 0.91, 0.94, 0.97,
+                       1.03, 1.06, 1.09, 1.12, 1.15]
     this.ball.pos.x += this.ball.vel.x ;
     this.ball.pos.y += this.ball.vel.y ;
     this.players[0].pos.y += this.players[0].vel.y ;

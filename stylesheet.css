@@ -22,7 +22,8 @@ div.full-game {
   height: 730px;
 
   position: absolute;
-  left: 18%;
+  right: 25%;
+  
 }
 div.control-instructions {
   background: url('images/control_instructions.png')no-repeat;
