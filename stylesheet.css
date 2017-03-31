@@ -16,6 +16,7 @@ canvas {
 }
 
 div.full-game {
+  margin:0;
   width:800px;
   background-color: black;
   height: 730px;
