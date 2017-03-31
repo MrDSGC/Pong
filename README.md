@@ -38,6 +38,28 @@ Scores rendered out on canvas update on round reset:
 
 The Ai of the game uses a simple algorithm to follow the ball based of their respective y positions on the canvas. I wrote a conditional function that increased the difficulty of the Ai based on the player's score to increase the variability of play for player retention.
 
+The computer increases in difficulty as the player scores more and slightly varies in speed to create variation in the game.
+``` javascript
+const compSpeed = [1.3, 1.4, 1.5, 1.55]
+const compvariation = [0.94, 0.97, 1.03, 1.06]
+let speed = 1
+if (this.players[0].score > 8) {
+  speed = compSpeed[3]
+} else if (this.players[0].score > 6) {
+  speed = compSpeed[2]
+} else if (this.players[0].score > 4) {
+  speed = compSpeed[1]
+} else {
+  speed = compSpeed[0]
+}
+if (this.players[1].pos.y < this.ball.pos.y) {
+  this.players[1].pos.y+= speed *
+  compvariation[Math.floor(Math.random()*compvariation.length)]
+} else if (this.players[1].pos.y > this.ball.pos.y ) {
+  this.players[1].pos.y-= speed *
+  compvariation[Math.floor(Math.random()*compvariation.length)]
+}
+```
 ### Future Directions for the Project
 
 While Pong itself may be a simpler game, many variations have been implemented over the years. I have some anticipated updates to implement into this game.

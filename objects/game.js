@@ -220,6 +220,7 @@ export default class Game {
         this.resetGame();
     }
     const compSpeed = [1.3, 1.4, 1.5, 1.55]
+    const compvariation = [0.94, 0.97, 1.03, 1.06]
     let speed = 1
     if (this.players[0].score > 8) {
       speed = compSpeed[3]
@@ -231,9 +232,11 @@ export default class Game {
       speed = compSpeed[0]
     }
     if (this.players[1].pos.y < this.ball.pos.y) {
-      this.players[1].pos.y+= speed
+      this.players[1].pos.y+= speed *
+      compvariation[Math.floor(Math.random()*compvariation.length)]
     } else if (this.players[1].pos.y > this.ball.pos.y ) {
-      this.players[1].pos.y-= speed
+      this.players[1].pos.y-= speed *
+      compvariation[Math.floor(Math.random()*compvariation.length)]
     }
 
     this.players.forEach(player => {
