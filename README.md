@@ -38,7 +38,7 @@ Scores rendered out on canvas update on round reset:
 
 The Ai of the game uses a simple algorithm to follow the ball based of their respective y positions on the canvas. I wrote a conditional function that increased the difficulty of the Ai based on the player's score to increase the variability of play for player retention.
 
-The computer increases in difficulty as the player scores more and slightly varies in speed to create variation in the game.
+The computer increases in difficulty as the player scores more and slightly varies in speed to create variation in the game:
 ``` javascript
 const compSpeed = [1.3, 1.4, 1.5, 1.55]
 const compvariation = [0.94, 0.97, 1.03, 1.06]

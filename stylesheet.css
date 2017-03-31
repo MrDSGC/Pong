@@ -1,4 +1,5 @@
 body {
+  width:40%;
   overflow: hidden;
   position: relative;
 }
@@ -22,8 +23,8 @@ div.full-game {
   height: 730px;
 
   position: absolute;
-  right: 25%;
-  
+  left: 50%;
+
 }
 div.control-instructions {
   background: url('images/control_instructions.png')no-repeat;
