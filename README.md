@@ -32,7 +32,7 @@ Also, in the spirit of replicating the retro experience, the classic pong collis
 In order to render the score dynamically on the play canvas, I used 15 character strings with `x`s and `os` to represent a 3x5 rectangle that would render out the pixelated digit. with each `x` representing a 10x10 white pixel on the canvas, i was able to create all 10 digits and render them out on the canvas conditionally from the players' scores.
 
 Scores rendered out on canvas update on round reset:
-![image of score](docs/images/giphy.png)
+![image of score](docs/images/giphy.gif)
 
 ### Computer difficulty
 
