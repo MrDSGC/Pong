@@ -150,7 +150,6 @@ class Game {
     this.ball.vel.x = 0;
     this.ball.vel.y = 0;
 
-    this.rallyCounter = 0
 
     //score
     this.pixelSize = 10;
@@ -184,8 +183,8 @@ class Game {
 
 
     //constants
-    const start_vel_x = [2,-2, 3, -3]
-    const start_vel_y = [1.5, -1.5, 1, -1, 2, -2]
+    const start_vel_x = [2.2, -2.2, 2.5, -2.5, 3, -3]
+    const start_vel_y = [1, -1, 1.5, -1.5, 2, -2]
     let hitByte = new Audio('sounds/collision.wav')
     let hitByte2 = new Audio('sounds/collision2.wav')
     this.hitArraySounds = [hitByte, hitByte2]
@@ -200,7 +199,11 @@ class Game {
       } else if (event.keyCode === 83) {
         //down
         this.players[0].vel.y = 3
-      } else if (event.keyCode === 32 && this.ball.vel.x === 0) {
+      } else if (
+        event.keyCode === 32 &&
+        this.ball.vel.x === 0 &&
+        this.players[0].score < 10 &&
+        this.players[1].score < 10) {
         //space
         this.ball.vel.x = start_vel_x[Math.floor(Math.random()*start_vel_x.length)];
         this.ball.vel.y = start_vel_y[Math.floor(Math.random()*start_vel_y.length)];
@@ -216,6 +219,22 @@ class Game {
 
   }
 
+  reset() {
+    this.ball.pos.x = 300;
+    this.ball.pos.y = 200;
+    this.ball.vel.x = 0;
+    this.ball.vel.y = 0;
+    this.players[0].vel.y = 0;
+    this.players.forEach(player => {
+      player.pos.y = this.canvas.height / 2
+      player.score = 0
+    });
+
+    document.getElementById("play-again").className = "invisible"
+    document.getElementById("win-left").className = "invisible"
+    document.getElementById("win-right").className = "invisible"
+  }
+
   resetGame () {
     this.ball.pos.x = 300;
     this.ball.pos.y = 200;
@@ -229,17 +248,20 @@ class Game {
   collide(player, ball) {
     if (player.left() < ball.right() && player.right() > ball.left() &&
     player.top() < ball.bottom() && player.bottom() > ball.top()) {
-      ball.vel.x = -ball.vel.x * 1.06;
-      this.rallyCounter++
-      this.hitArraySounds[Math.floor(Math.random()*this.hitArraySounds.length)].play()
+      ball.vel.x = -ball.vel.x * 1.02;
+      if(!this.canvas.muted) {
+        this.hitArraySounds[Math.floor(Math.random()*this.hitArraySounds.length)].play()
+      }
     }
   }
 
   endgame() {
     if (this.players[0].score === 10) {
       this.renderHumanWinner()
+      document.getElementById("play-again").className = "visible"
     } else if (this.players[1].score === 10) {
       this.renderCompWinner()
+      document.getElementById("play-again").className = "visible"
     }
 
   }
@@ -283,41 +305,44 @@ class Game {
 
 
   renderWinner () {
-    console.log("You Win");
+    document.getElementById("win-left").className = "visible"
   }
 
   renderCompWinner () {
-    console.log("You Lose");
+    document.getElementById("win-right").className = "visible"
   }
 
 
   updateFrame () {
+    const variation = [1.05, 1.07, 1.09, 1.11]
     this.ball.pos.x += this.ball.vel.x ;
     this.ball.pos.y += this.ball.vel.y ;
     this.players[0].pos.y += this.players[0].vel.y ;
     if (this.ball.vel.y < 0 && this.ball.top() < 0 ||
         this.ball.vel.y > 0 && this.ball.bottom() > this.canvas.height) {
-        this.ball.vel.y = -this.ball.vel.y;
-        this.hitArraySounds[Math.floor(Math.random()*this.hitArraySounds.length)].play()
+        this.ball.vel.y = -this.ball.vel.y * variation[Math.floor(Math.random()*variation.length)]
+        if(!this.canvas.muted) {
+          this.hitArraySounds[Math.floor(Math.random()*this.hitArraySounds.length)].play()
+        }
     }
 
     if (this.ball.right() < 0 || this.ball.left() > this.canvas.width) {
         ++this.players[this.ball.vel.x < 0 | 0].score;
-        this.scoreByte.play()
-        console.log(this.players[0].score);
-        console.log(this.players[1].score);
+        if(!this.canvas.muted) {
+          this.scoreByte.play()
+        }
         this.resetGame();
     }
-    const compSpeed = [1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
+    const compSpeed = [1.3, 1.4, 1.5, 1.55]
     let speed = 1
-    if (this.rallyCounter < 8) {
-      speed = compSpeed[0]
-    } else if (this.rallyCounter < 16) {
-      speed = compSpeed[1]
-    } else if (this.rallyCounter < 24) {
-      speed = compSpeed[2]
-    } else {
+    if (this.players[0].score > 8) {
       speed = compSpeed[3]
+    } else if (this.players[0].score > 6) {
+      speed = compSpeed[2]
+    } else if (this.players[0].score > 4) {
+      speed = compSpeed[1]
+    } else {
+      speed = compSpeed[0]
     }
     if (this.players[1].pos.y < this.ball.pos.y) {
       this.players[1].pos.y+= speed
@@ -378,7 +403,7 @@ class Ball extends __WEBPACK_IMPORTED_MODULE_0__object_js__["a" /* default */] {
 
 class Player extends __WEBPACK_IMPORTED_MODULE_0__object__["a" /* default */] {
   constructor () {
-    super(5, 70);
+    super(5, 60);
     this.vel = new __WEBPACK_IMPORTED_MODULE_1__point__["a" /* default */];
     this.score = 0
 
@@ -401,6 +426,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("game");
   const pong = new __WEBPACK_IMPORTED_MODULE_0__objects_game_js__["a" /* default */](canvas);
+
+  document.getElementById("mute-button").onclick = () => {
+    if(pong.canvas.muted) {
+      pong.canvas.muted = false;
+    } else {
+      pong.canvas.muted = true;
+    }
+  }
+
+  document.getElementById("play-again").onclick =() => {
+    pong.reset()
+  }
 
 })
 

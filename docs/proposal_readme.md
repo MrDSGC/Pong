@@ -1,4 +1,4 @@
-## Pong+
+## Pong
 
 ### Background
 
