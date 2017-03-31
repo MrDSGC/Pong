@@ -5,12 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const pong = new Game(canvas);
 
   document.getElementById("mute-button").onclick = () => {
-    console.log(canvas.muted);
-    if(canvas.muted) {
-      canvas.muted = false;
+    if(pong.canvas.muted) {
+      pong.canvas.muted = false;
     } else {
-      canvas.muted = true;
+      pong.canvas.muted = true;
     }
+  }
+
+  document.getElementById("play-again").onclick =() => {
+    pong.reset()
   }
 
 })

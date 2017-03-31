@@ -11,7 +11,7 @@ img {
 
 canvas {
   position: absolute;
-  top: 182px;
+  top: 160px;
   right: 89.5px;
 }
 
@@ -44,14 +44,61 @@ div.score-rules {
   transform: rotate(7deg);
 }
 
-div.mute-button {
-  background: url('images/muted.svg')no-repeat;
+#win-left {
+  background: url('images/win.png')no-repeat;
   position:absolute;
   background-size: contain;
-  width: 100px;
-  height: 100px;
+  height: 40px;
+  width: 200px;
+  z-index: 1;
+  top: 248px;
+  left: 226px;
+}
+
+#win-right {
+  background: url('images/win.png')no-repeat;
+  position:absolute;
+  background-size: contain;
+  height: 40px;
+  width: 200px;
+  z-index: 1;
+  top: 248px;
+  right: 117px;
+}
+
+
+#play-again {
+  background: url('images/playagain.png')no-repeat;
+  position:absolute;
+  background-size: contain;
+  height: 20px;
+  width: 200px;
   z-index: 1;
   cursor: pointer;
+  bottom: 248px;
+  left: 226px;
+}
+div.invisible {
+  visibility: hidden;
+}
+div.visible {
+  visibility: visible;
+}
+div.mute-button {
+  background: url('images/unmuted.png')no-repeat;
+  position:absolute;
+  background-size: contain;
+  width: 80px;
+  height: 80px;
+  z-index: 1;
+  cursor: pointer;
+  right: 33px;
+  top: 10px;
+}
+
+.mute-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px
 }
 
 div.control-instructions, div.start-instructions, div.score-rules {
