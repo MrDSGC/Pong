@@ -219,7 +219,7 @@ export default class Game {
         }
         this.resetGame();
     }
-    const compSpeed = [1.3, 1.4, 1.5, 1.55]
+    const compSpeed = [1.1, 1.2, 1.3, 1.4]
     const compvariation = [0.94, 0.97, 1.03, 1.06]
     let speed = 1
     if (this.players[0].score > 8) {
