@@ -78,10 +78,10 @@ export default class Game {
 
     //key events
     window.addEventListener('keydown', event => {
-      if (event.keyCode === 87) {
+      if (event.keyCode === 87 || event.keyCode == 38) {
         //up
         this.players[0].vel.y = -3
-      } else if (event.keyCode === 83) {
+      } else if (event.keyCode === 83 || event.keyCode == 40) {
         //down
         this.players[0].vel.y = 3
       } else if (
